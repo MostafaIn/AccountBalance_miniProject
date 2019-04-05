@@ -1,0 +1,78 @@
+*{
+    box-sizing: border-box;
+}
+body{
+    background-color: #eee;
+    max-width: 1600px;
+}
+div.AccBalanceApp{
+     width: 90%;
+     margin: auto;
+     background-color: white;
+     padding: 40px;
+}
+main.wrapper{
+    padding: 20px;
+    margin: auto;
+    border: 2px groove #e4e4e4;
+    width: 90%;
+}
+div.controller{
+    border: 1px solid #e4e4e4;
+    padding: 10px;
+    text-align: center;
+}
+div.controller input{
+    font-size: calc(.2vw + 12px);
+    padding: 10px;
+    outline: none;
+}
+div.controller select.options{
+    font-size: calc(.2vw + 12px);
+    /* padding: 10px; */
+    outline: none;
+    margin: 10px;
+    height: 40px;
+    width: 140px;
+}
+button.submitBtn{
+    border-radius: 5px;
+    background-color: #e4e4e4;
+    font-size: calc(.2vw + 12px);
+    padding: 10px;
+    /* margin: 10px; */
+    outline: none;
+    width: 140px;
+}
+button.submitBtn:hover{
+    background-color: #5f5f5f;
+    color: white;
+    cursor: pointer;
+}
+div.container{
+    display: flex;
+    margin-top: 30px;
+    /* flex-wrap: wrap; */
+}
+
+
+
+
+ /* by javascript */
+ fieldset.balanceLists{
+     text-align: center;
+     border:2px solid  #e4e4e4;
+     width:50%;
+ }
+.balanceLists .Table{
+     text-align: center;
+     margin: 20px auto;
+     width: 100%;
+ }
+ .Table td{
+     border: 1px dashed #e4e4e4;
+     padding: 15px;
+ }
+ .Table tr:nth-child(odd){
+     background-color: #f0f0f0;
+ }

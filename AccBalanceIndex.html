@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="AccBalanceStyle.css">
+    <title>Account Balance(mini project)</title>
+</head>
+
+<body>
+    <div class="AccBalanceApp">
+        <main class="wrapper">
+            <h2> Account Balance </h2>
+            <div class="controller" id="input-form">
+                <input type="text" class="descriptionInput" placeholder="Enter Description ..." />
+                <input type="number" class="amountInput" placeholder="Enter amount ..." />
+                <select class="options">
+                    <option class="selectOption" value="select" selected>--select--</option>
+                    <option class="incomeOption" value="INCOME">INCOME</option>
+                    <option class="expenseOption" value="EXPENSE">EXPENSE</option>
+                </select>
+                <button type="submit" class="submitBtn"> ADD</button>
+            </div>
+            <hr />
+            <div class="container">
+                <fieldset class="balanceLists">
+                    <legend>INCOMES LIST</legend>
+                    <table class="Table incomesTable">
+                    </table>
+                    <h5 class="totalIncome"></h5>
+                </fieldset>
+                <fieldset class="balanceLists">
+                    <legend>EXPENSES LIST</legend>
+                    <table class="Table expensesTable">
+                    </table>
+                    <h5 class="totalExpense"></h5>
+                </fieldset>
+            </div>
+            <br />
+            <h4> <sub>***</sub> BALANCE <sub>***</sub></h4>
+            <div class="subTitle">
+
+            </div>
+            <hr />
+        </main>
+    </div>
+
+    <script src="AccBalanceScript.js"></script>
+</body>
+
+</html>
