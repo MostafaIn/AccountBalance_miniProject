@@ -38,7 +38,7 @@ const displayDateTime = () => {
     return `${day}.${month}.${year} ${hour}:${min}`;
 }
 // console.log(displayDateTime());
-
+/***  THE MAIN VARIABLE THAT STORE ALL ARRAYS AND RELATED FUNCTIONS ***/
 let accountBalance = {
     incomes: [],
     expenses: [],
@@ -102,7 +102,7 @@ let accountBalance = {
         return calcBalance;
     }
 };
-
+/***  DISPLAY THE DATA STORED IN ARRAYS  ***/
 window.addEventListener('load', () => {
     accountBalance.incomesSource(accountBalance.incomes);
 
@@ -111,7 +111,7 @@ window.addEventListener('load', () => {
 
 });
 
-// for the submit button
+/***  THE SUBMIT BUTTON THAT WORKS DEPEND ON THE OPTIONS  ***/
 submitBtn.addEventListener('click', (e) => {
     if (incomeOption.selected && descriptionInput.value && amountInput.value) {
         accountBalance.incomesSource(accountBalance.addIncome(descriptionInput.value.toLowerCase(), parseInt(amountInput.value), displayDateTime()));
@@ -133,7 +133,8 @@ submitBtn.addEventListener('click', (e) => {
 });
 
 
-// save my data to localstorage
+
+/***  THIS FUNCTION CREATE THE JSON AND SET DATA TO LOCAL STORAGE  ***/
 function savetoLocalStorage() {
     let incomesStr = JSON.stringify(accountBalance.incomes);
     localStorage.setItem('incomes', incomesStr);
@@ -141,8 +142,7 @@ function savetoLocalStorage() {
     let expensesStr = JSON.stringify(accountBalance.expenses);
     localStorage.setItem('expenses', expensesStr);
 }
-
-//get data from local storage
+/***  GET DATA FROM LOCAL STORAGE ***/
 function getFromLocalStorage() {
     let incomesObj = localStorage.getItem('incomes');
     accountBalance.incomes = JSON.parse(incomesObj);
@@ -158,6 +158,5 @@ function getFromLocalStorage() {
 }
 getFromLocalStorage();
 console.log(getFromLocalStorage());
-// accountBalance.incomesSource(accountBalance.addIncome(incomeDescription.incomes, incomeAmount.incomes, time.time));
 
-
+// :)
