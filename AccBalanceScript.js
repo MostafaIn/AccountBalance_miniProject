@@ -15,69 +15,6 @@ const totalIncome = document.querySelector(".totalIncome");
 const totalExpense = document.querySelector(".totalExpense");
 const subTitle = document.querySelector(".subTitle");
 
-
-let accountBalance = {
-    incomes: [],
-    expenses: [],
-    addIncome: function (incomeDescription, incomeAmount, time) {
-        return this.incomes.push({ incomeDescription, incomeAmount, time });
-    },
-    displayIncomesTable: function (content) {
-        const { incomeDescription, incomeAmount, time } = content;
-        return `<tr>
-            <td>${incomeDescription}</td>
-            <td>${incomeAmount} €</td>
-            <td>${time}</td>
-             </tr>`;
-    },
-    incomesSource: function (incomes) {
-        let contents = '';
-        this.incomes.forEach(element => {
-            contents += this.displayIncomesTable(element);
-        });
-        incomesTable.innerHTML = contents;
-    },
-
-    addExpense: function (expenseDescription, expenseAmount, time) {
-        return this.expenses.push({ expenseDescription, expenseAmount, time });
-    },
-    displayExpensesTable: function (content) {
-        const { expenseDescription, expenseAmount, time } = content;
-        return `<tr>
-            <td>${expenseDescription}</td>
-            <td>${expenseAmount}</td>
-            <td>${time}</td>
-             </tr>`;
-    },
-    expensesSource: function (expenses) {
-        let contents = '';
-        this.expenses.forEach(element => {
-            contents += this.displayExpensesTable(element);
-        });
-        expensesTable.innerHTML = contents;
-    },
-    totalIncome: function () {
-        let total = 0;
-        this.incomes.forEach(element => {
-            total += element.incomeAmount;
-        });
-        return total;
-    },
-    totalExpense: function () {
-        let total = 0;
-        this.expenses.forEach(element => {
-            total += element.expenseAmount;
-        });
-        return total;
-    },
-    calculateBalance: function () {
-        let calcBalance = this.totalIncome() - this.totalExpense();
-        return calcBalance;
-    }
-};
-
-
-
 /***  this function DISPLAY THE DATE AND TIME of the income  ***/
 const displayDateTime = () => {
     let myDate = new Date();
@@ -100,64 +37,127 @@ const displayDateTime = () => {
     }
     return `${day}.${month}.${year} ${hour}:${min}`;
 }
-console.log(displayDateTime());
+// console.log(displayDateTime());
 
+let accountBalance = {
+    incomes: [],
+    expenses: [],
+    addIncome: function (incomeDescription, incomeAmount, time) {
+        this.incomes.push({ incomeDescription, incomeAmount, time });
+        savetoLocalStorage();
+        return 0;
+    },
+    displayIncomesTable: function (content) {
+        const { incomeDescription, incomeAmount, time } = content;
+        return `<tr>
+            <td>${incomeDescription}</td>
+            <td>${incomeAmount} €</td>
+            <td>${time}</td>
+             </tr>`;
+    },
+    incomesSource: function (incomes) {
+        let contents = '';
+        this.incomes.forEach(element => {
+            contents += this.displayIncomesTable(element);
+        });
+        incomesTable.innerHTML = contents;
+    },
+    totalIncome: function () {
+        let total = 0;
+        this.incomes.forEach(element => {
+            total += element.incomeAmount;
+        });
+        return total;
+    },
 
-// for the submit button
-submitBtn.addEventListener('click', (e) => {
-
-    if (incomeOption.selected) {
-
-        accountBalance.incomesSource(accountBalance.addIncome(descriptionInput.value.toLowerCase(), parseInt(amountInput.value), displayDateTime()));
-        totalIncome.textContent = `Total Incomes: ${accountBalance.totalIncome()} €`;
-        console.log(accountBalance.incomes);
-        console.log(accountBalance.totalIncome());
-
-        e.stopImmediatePropagation();
-    } else if (expenseOption.selected) {
-
-        accountBalance.expensesSource(accountBalance.addExpense(descriptionInput.value.toLowerCase(), parseInt(amountInput.value), displayDateTime()));
-
-        totalExpense.textContent = `Total Expenses: ${accountBalance.totalExpense()} €`;
-        console.log(accountBalance.expenses);
-        console.log(accountBalance.totalExpense());
-
-        e.stopImmediatePropagation();
-    } else {
-        alert('choose one of the options!');
-    }
-
-    descriptionInput.value = '';
-    amountInput.value = '';
-    subTitle.textContent = `This account balance is = ${accountBalance.calculateBalance()}`;
-    (accountBalance.calculateBalance() <= 0) ? subTitle.style.color = '#330000' : subTitle.style.color = '#003300';
-    localStore();
-});
-
-/****  FOR LOCAL STORAGE ****/
-function localStore() {
-    // localStorage.clear();
-    const incomesJSON = JSON.stringify(accountBalance.incomes);
-    localStorage.setItem(accountBalance.incomes, incomesJSON);
-
-    const expensesJSON = JSON.stringify(accountBalance.expenses);
-    localStorage.setItem(accountBalance.expenses, expensesJSON);
-
-    if (window.localStorage.getItem(accountBalance.incomes)) {
-        accountBalance.incomes = JSON.parse(window.localStorage.getItem(accountBalance.incomes));
-    }
-    if (window.localStorage.getItem(accountBalance.expenses)) {
-        accountBalance.expenses = JSON.parse(window.localStorage.getItem(accountBalance.expenses));
+    addExpense: function (expenseDescription, expenseAmount, time) {
+        this.expenses.push({ expenseDescription, expenseAmount, time });
+        savetoLocalStorage();
+        return 0;
+    },
+    displayExpensesTable: function (content) {
+        const { expenseDescription, expenseAmount, time } = content;
+        return `<tr>
+            <td>${expenseDescription}</td>
+            <td>${expenseAmount} €</td>
+            <td>${time}</td>
+             </tr>`;
+    },
+    expensesSource: function (expenses) {
+        let contents = '';
+        this.expenses.forEach(element => {
+            contents += this.displayExpensesTable(element);
+        });
+        expensesTable.innerHTML = contents;
+    },
+    totalExpense: function () {
+        let total = 0;
+        this.expenses.forEach(element => {
+            total += element.expenseAmount;
+        });
+        return total;
+    },
+    calculateBalance: function () {
+        let calcBalance = this.totalIncome() - this.totalExpense();
+        return calcBalance;
     }
 };
 
+window.addEventListener('load', () => {
+    accountBalance.incomesSource(accountBalance.incomes);
+
+    accountBalance.expensesSource(accountBalance.expenses);
 
 
+});
+
+// for the submit button
+submitBtn.addEventListener('click', (e) => {
+    if (incomeOption.selected && descriptionInput.value && amountInput.value) {
+        accountBalance.incomesSource(accountBalance.addIncome(descriptionInput.value.toLowerCase(), parseInt(amountInput.value), displayDateTime()));
+        totalIncome.textContent = `Total Incomes: ${accountBalance.totalIncome()} €`;
+        console.log(accountBalance.incomes);
+        e.stopImmediatePropagation();
+    } else if (expenseOption.selected && descriptionInput.value && amountInput.value) {
+        accountBalance.expensesSource(accountBalance.addExpense(descriptionInput.value.toLowerCase(), parseInt(amountInput.value), displayDateTime()));
+        totalExpense.textContent = `Total Expenses: ${accountBalance.totalExpense()} €`;
+        console.log(accountBalance.expenses);
+        e.stopImmediatePropagation();
+    } else {
+        alert('please Enter and choose one of the options!');
+    }
+    descriptionInput.value = '';
+    amountInput.value = '';
+    subTitle.textContent = `The account balance is = ${accountBalance.calculateBalance()} €`;
+    (accountBalance.calculateBalance() <= 0) ? subTitle.style.color = '#330000' : subTitle.style.color = '#003300';
+});
 
 
+// save my data to localstorage
+function savetoLocalStorage() {
+    let incomesStr = JSON.stringify(accountBalance.incomes);
+    localStorage.setItem('incomes', incomesStr);
 
+    let expensesStr = JSON.stringify(accountBalance.expenses);
+    localStorage.setItem('expenses', expensesStr);
+}
 
+//get data from local storage
+function getFromLocalStorage() {
+    let incomesObj = localStorage.getItem('incomes');
+    accountBalance.incomes = JSON.parse(incomesObj);
+    if (!accountBalance.incomes) {
+        accountBalance.incomes = [];
+    }
 
-
+    let expensesObj = localStorage.getItem('expenses');
+    accountBalance.expenses = JSON.parse(expensesObj);
+    if (!accountBalance.expenses) {
+        accountBalance.expenses = [];
+    }
+}
+getFromLocalStorage();
+console.log(getFromLocalStorage());
+// accountBalance.incomesSource(accountBalance.addIncome(incomeDescription.incomes, incomeAmount.incomes, time.time));
 
 

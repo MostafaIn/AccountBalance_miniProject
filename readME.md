@@ -4,11 +4,11 @@
 
 ##Demo
 
-[countries Info sorting and search App](https://mostafain.github.io/AccountBalance_miniProject/AccBalanceIndex.html)
+[Account Balance App](https://mostafain.github.io/AccountBalance_miniProject/AccBalanceIndex.html)
 
 ## Screenshot
 
-![Example screenshot]()
+![Example screenshot](AccBalance_Screenshot.png)
 
 ## Technologies
 

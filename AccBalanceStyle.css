@@ -3,13 +3,13 @@
 }
 body{
     background-color: #eee;
-    max-width: 1600px;
 }
 div.AccBalanceApp{
      width: 90%;
      margin: auto;
      background-color: white;
      padding: 40px;
+     text-align: center;
 }
 main.wrapper{
     padding: 20px;
@@ -52,7 +52,7 @@ button.submitBtn:hover{
 div.container{
     display: flex;
     margin-top: 30px;
-    /* flex-wrap: wrap; */
+    flex-wrap: wrap;
 }
 
 
@@ -62,7 +62,8 @@ div.container{
  fieldset.balanceLists{
      text-align: center;
      border:2px solid  #e4e4e4;
-     width:50%;
+     width:45%;
+     flex: 1;
  }
 .balanceLists .Table{
      text-align: center;
