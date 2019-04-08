@@ -22,6 +22,11 @@ div.controller{
     padding: 10px;
     text-align: center;
 }
+div.controller table{
+    text-align: center;
+    margin: auto;
+    /* border: 1px solid black; */
+}
 div.controller input{
     font-size: calc(.2vw + 12px);
     padding: 10px;
@@ -54,9 +59,10 @@ div.container{
     margin-top: 30px;
     flex-wrap: wrap;
 }
-
-
-
+.errorTitle, .optionsErrorTitle{
+    color: red;
+    margin: 0;
+}
 
  /* by javascript */
  fieldset.balanceLists{

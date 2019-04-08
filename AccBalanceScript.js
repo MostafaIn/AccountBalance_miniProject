@@ -14,6 +14,8 @@ const expensesTable = document.querySelector(".expensesTable");
 const totalIncome = document.querySelector(".totalIncome");
 const totalExpense = document.querySelector(".totalExpense");
 const subTitle = document.querySelector(".subTitle");
+const errorTitle = document.querySelector(".errorTitle");
+const optionsErrorTitle = document.querySelector(".optionsErrorTitle");
 
 /***  this function DISPLAY THE DATE AND TIME of the income  ***/
 const displayDateTime = () => {
@@ -50,7 +52,7 @@ let accountBalance = {
     displayIncomesTable: function (content) {
         const { incomeDescription, incomeAmount, time } = content;
         return `<tr>
-            <td>${incomeDescription}</td>
+            <td>${incomeDescription.toLowerCase()}</td>
             <td>${incomeAmount} €</td>
             <td>${time}</td>
              </tr>`;
@@ -78,7 +80,7 @@ let accountBalance = {
     displayExpensesTable: function (content) {
         const { expenseDescription, expenseAmount, time } = content;
         return `<tr>
-            <td>${expenseDescription}</td>
+            <td>${expenseDescription.toLowerCase()}</td>
             <td>${expenseAmount} €</td>
             <td>${time}</td>
              </tr>`;
@@ -105,26 +107,39 @@ let accountBalance = {
 /***  DISPLAY THE DATA STORED IN ARRAYS  ***/
 window.addEventListener('load', () => {
     accountBalance.incomesSource(accountBalance.incomes);
-
     accountBalance.expensesSource(accountBalance.expenses);
-
 
 });
 
 /***  THE SUBMIT BUTTON THAT WORKS DEPEND ON THE OPTIONS  ***/
 submitBtn.addEventListener('click', (e) => {
+
     if (incomeOption.selected && descriptionInput.value && amountInput.value) {
-        accountBalance.incomesSource(accountBalance.addIncome(descriptionInput.value.toLowerCase(), parseInt(amountInput.value), displayDateTime()));
+        if (!descriptionInput.value.match(/^[a-zA-Z]+$/)) {
+            errorTitle.innerHTML = "just alphabets are allowed.";
+            return false;
+        }
+        optionsErrorTitle.innerHTML = " ";
+        errorTitle.innerHTML = " ";
+        accountBalance.incomesSource(accountBalance.addIncome(descriptionInput.value, parseInt(amountInput.value), displayDateTime()));
         totalIncome.textContent = `Total Incomes: ${accountBalance.totalIncome()} €`;
+
         console.log(accountBalance.incomes);
         e.stopImmediatePropagation();
     } else if (expenseOption.selected && descriptionInput.value && amountInput.value) {
-        accountBalance.expensesSource(accountBalance.addExpense(descriptionInput.value.toLowerCase(), parseInt(amountInput.value), displayDateTime()));
+        if (!descriptionInput.value.match(/^[a-zA-Z]+$/)) {
+            errorTitle.innerHTML = "just alphabets are allowed.";
+            return false;
+        }
+        optionsErrorTitle.innerHTML = " ";
+        errorTitle.innerHTML = " ";
+        accountBalance.expensesSource(accountBalance.addExpense(descriptionInput.value, parseInt(amountInput.value), displayDateTime()));
         totalExpense.textContent = `Total Expenses: ${accountBalance.totalExpense()} €`;
         console.log(accountBalance.expenses);
         e.stopImmediatePropagation();
     } else {
-        alert('please Enter and choose one of the options!');
+        optionsErrorTitle.innerHTML = 'income OR expense';
+
     }
     descriptionInput.value = '';
     amountInput.value = '';

@@ -14,15 +14,29 @@
         <main class="wrapper">
             <h2> Account Balance </h2>
             <div class="controller" id="input-form">
-                <input type="text" class="descriptionInput" placeholder="Enter Description ..." />
-                <input type="number" class="amountInput" placeholder="Enter amount ..." />
-                <select class="options">
-                    <option class="selectOption" value="select" selected>--select--</option>
-                    <option class="incomeOption" value="INCOME">INCOME</option>
-                    <option class="expenseOption" value="EXPENSE">EXPENSE</option>
-                </select>
-                <button type="submit" class="submitBtn"> ADD</button>
+                <table>
+                    <tr>
+                        <td><input type="text" class="descriptionInput" placeholder="Enter Description ..." /></td>
+                        <td><input type="number" class="amountInput" placeholder="Enter amount ..." /></td>
+                        <td><select class="options">
+                                <option class="selectOption" value="select" selected>--select--</option>
+                                <option class="incomeOption" value="INCOME">INCOME</option>
+                                <option class="expenseOption" value="EXPENSE">EXPENSE</option>
+                            </select></td>
+                        <td><button type="submit" class="submitBtn"> ADD</button></td>
+                    </tr>
+                    <tr>
+                        <td><span class="errorTitle"></span></td>
+                        <td></td>
+                        <td><span class="optionsErrorTitle"></span></td>
+                    </tr>
+                </table>
+
+
+
+
             </div>
+            <span class="errorTitle"></span>
             <hr />
             <div class="container">
                 <fieldset class="balanceLists">
